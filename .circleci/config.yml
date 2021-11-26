@@ -69,10 +69,10 @@ jobs:
             google-chrome --version
       #      chromedriver --version
           name: Check install
-      #- run:
-      #    name: Running X virtual framebuffer
-      #    command: Xvfb :99 -screen 0 1280x1024x24
-      #    background: true
+      - run:
+          name: Running X virtual framebuffer
+          command: export DISPLAY=:99
+          #background: true
       #- setup_remote_docker:
       #    version: 20.10.2
       #- saucectl/saucectl-run

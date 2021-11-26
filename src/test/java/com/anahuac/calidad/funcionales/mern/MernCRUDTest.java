@@ -28,7 +28,7 @@ public class MernCRUDTest {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless");     
         options.addArguments("--disable-gpu");
-        options.addArguments("--window-size=1400,800");
+        options.addArguments("--window-size=1920,1080");
 	    driver = new ChromeDriver(options);
 	    baseUrl = "https://mern-crud.herokuapp.com/"; //"http://localhost:3000";
 	    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);

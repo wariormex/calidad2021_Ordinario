@@ -16,7 +16,7 @@ jobs:
       - image: circleci/mysql:latest
         environment:
           MYSQL_ROOT_PASSWORD: secret
-          #MYSQL_DATABASE: pruebas_db
+          MYSQL_DATABASE: test_db
           MYSQL_DRIVER: com.mysql.cj.jdbc.Driver
           PRUEBAS_DB_URL: jdbc:mysql://localhost:3306/pruebas_db
           
@@ -41,6 +41,7 @@ jobs:
               sleep 1
             done
             echo Failed waiting for MySQL && exit 1  
+
       - run: sudo apt-get update -y  
       - run: sudo apt-get install -y default-mysql-client
       - run: mysql -h 127.0.0.1 -u root -psecret -e "create database pruebas_db"

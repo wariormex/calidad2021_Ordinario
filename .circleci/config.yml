@@ -14,7 +14,7 @@ jobs:
     # Be sure to update the Docker image tag below to openjdk version of your application.
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
-      - image: cimg/openjdk:11.0
+      - image: cimg/openjdk:11.0.12-browsers
       #- image: cimg/base:2021.11
       - image: circleci/mysql:latest
         environment:
@@ -73,7 +73,7 @@ jobs:
             sudo apt-get -y install imagemagick x11-apps
       - run:
           name: Running X virtual framebuffer
-          command: Xvfb :0 -ac &
+          command: Xvfb :99 -ac &
 
       - run:
           name: Run Tests
@@ -83,16 +83,16 @@ jobs:
       
       
       #Selenium
-      #- run: mkdir test-reports
-      #- run:
-      #    name: Download Selenium
-      #    command: curl -O http://selenium-release.storage.googleapis.com/4.0-alpha-5/selenium-server-4.0.0-alpha-5.jar
-      #- run:
-      #    name: Start Selenium
-      #    command: java -jar selenium-server-4.0.0-alpha-5.jar -log test-reports/selenium.log
-      #    background: true
-      #- run: sudo apt-get update -y  
-      #- run: sudo apt-get install -y libnss3-dev
+      - run: mkdir test-reports
+      - run:
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/4.0-alpha-5/selenium-server-4.0.0-alpha-5.jar
+      - run:
+          name: Start Selenium
+          command: java -jar selenium-server-4.0.0-alpha-5.jar -log test-reports/selenium.log
+          background: true
+      - run: sudo apt-get update -y  
+      - run: sudo apt-get install -y libnss3-dev
       #Browser
       #- browser-tools/install-chrome
       #- browser-tools/install-chromedriver

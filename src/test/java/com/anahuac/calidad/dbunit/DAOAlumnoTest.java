@@ -126,9 +126,15 @@ public class DAOAlumnoTest extends DBTestCase{
 		Alumno alumnoExpected = new Alumno("hola3","003",20,"hola@hola.com");;
 		AlumnoDAOmysql daoMySQL = new AlumnoDAOmysql();
 		
-		Alumno alumnoActual = daoMySQL.consultarAlumno(alumnoExpected.getId());
 		
 		try {
+			IDataSet databaseDataSet = getConnection().createDataSet();			
+			ITable actualTable = databaseDataSet.getTable("alumnos_tbl");
+			IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File("src/resources/iniDB.xml"));
+			ITable expectedTable = expectedDataSet.getTable("alumnos_tbl");
+			
+			Alumno alumnoActual = daoMySQL.consultarAlumno(alumnoExpected.getId());
+			
 			assertThat(alumnoExpected.getNombre(),is(alumnoActual.getNombre()));
 			assertThat(alumnoExpected.getId(),is(alumnoActual.getId()));
 			assertThat(alumnoExpected.getEdad(),is(alumnoActual.getEdad()));

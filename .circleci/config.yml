@@ -14,9 +14,6 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
       - image: circleci/mysql:latest
-        auth:
-          username: wariormex #mydockerhub-user
-          password: Wrawaphog1998 #$DOCKERHUB_PASSWORD
         environment:
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DATABASE: pruebas_db

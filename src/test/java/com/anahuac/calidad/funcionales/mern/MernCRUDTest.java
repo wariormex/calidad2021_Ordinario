@@ -34,7 +34,7 @@ public class MernCRUDTest {
 	    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 	    js = (JavascriptExecutor) driver;
 	    
-	    driver.get("http://localhost:3000");
+	    driver.get(baseUrl);
 	    String tag = driver.findElement(By.xpath("/html/body/div/div/div[2]/table/tbody")).getText();
 	    while(tag != "") {
 	    	pause(1000);

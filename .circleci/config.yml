@@ -73,7 +73,7 @@ jobs:
             sudo apt-get -y install imagemagick x11-apps
       - run:
           name: Running X virtual framebuffer
-          command: Xvfb :99 -ac &
+          command: Xvfb :0 -ac &
 
       - run:
           name: Run Tests

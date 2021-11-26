@@ -3,6 +3,7 @@
 version: 2.1
 orbs:
   browser-tools: circleci/browser-tools@1.2.3
+  saucectl: saucelabs/saucectl-run@2.0.0
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -24,6 +25,7 @@ jobs:
       - image: circleci/node:buster-browsers
       - image: cimg/node:17.1.0-browsers
       - image: wariormex/mern-crud:latest
+      - image: cimg/node:lts
                  
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
@@ -71,7 +73,9 @@ jobs:
       #    name: Running X virtual framebuffer
       #    command: Xvfb :99 -screen 0 1280x1024x24
       #    background: true
-
+      - setup_remote_docker:
+          version: 20.10.2
+      - saucectl/saucectl-run
 
       # Use mvn clean and package as the standard maven build phase
       - run:

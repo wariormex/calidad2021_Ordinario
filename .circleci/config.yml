@@ -75,7 +75,7 @@ jobs:
       - run: sudo apt-get update -y 
       - run: sudo apt-get install -y google-chrome-stable
       - run: sudo apt-get install -y xvfb
-      - run: xvfb-run google-chrome --disable-gpu --no-sandbox --disable-setuid-sandbox
+      - run: xvfb-run google-chrome-stable --headless --disable-gpu --no-sandbox --disable-setuid-sandbox --remote-debugging-port=9222 http://localhost &
       - run:
           name: Running X virtual framebuffer
           command: export DISPLAY=:99

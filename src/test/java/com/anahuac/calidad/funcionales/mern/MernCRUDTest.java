@@ -25,7 +25,7 @@ public class MernCRUDTest {
 	  public void setUp() throws Exception {
 		WebDriverManager.chromedriver().setup();
 	    driver = new ChromeDriver();
-	    baseUrl = "http://localhost:3000";//"https://mern-crud.herokuapp.com/";
+	    baseUrl = "https://mern-crud.herokuapp.com/";//"http://localhost:3000";
 	    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 	    js = (JavascriptExecutor) driver;
 	    

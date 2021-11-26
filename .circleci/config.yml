@@ -3,7 +3,7 @@
 version: 2.1
 orbs:
   #browser-tools: circleci/browser-tools@1.2.3
-  #saucectl: saucelabs/saucectl-run@2.0.0
+  saucectl: saucelabs/saucectl-run@2.0.0
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -25,7 +25,7 @@ jobs:
       #- image: circleci/node:buster-browsers
       #- image: cimg/node:17.1.0-browsers
       #- image: wariormex/mern-crud:latest
-      #- image: cimg/node:lts
+      - image: cimg/node:lts
                  
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
@@ -52,50 +52,50 @@ jobs:
       - run: mysql -h 127.0.0.1 -u root -psecret -e "USE pruebas_db;CREATE TABLE alumnos_tbl(id varchar(11) NOT NULL, nombre varchar(45) DEFAULT NULL, email varchar(45) DEFAULT NULL, edad int(11) DEFAULT NULL, PRIMARY KEY (id));"
       
       #Selenium
-      - run: mkdir test-reports
-      - run:
-          name: Download Selenium
-          command: curl -O http://selenium-release.storage.googleapis.com/4.0-alpha-5/selenium-server-4.0.0-alpha-5.jar
-      - run:
-          name: Start Selenium
-          command: |
-            java -jar selenium-server-4.0.0-alpha-5.jar -log test-reports/selenium.log
-            java -jar selenium-server-4.0.0-alpha-5.jar -role hub
-            java -jar selenium-server-4.0.0-alpha-5.jar -role node -hub http://localhost:4444
-          background: true
+      #- run: mkdir test-reports
+      #- run:
+      #    name: Download Selenium
+      #    command: curl -O http://selenium-release.storage.googleapis.com/4.0-alpha-5/selenium-server-4.0.0-alpha-5.jar
+      #- run:
+      #    name: Start Selenium
+      #    command: |
+      #      java -jar selenium-server-4.0.0-alpha-5.jar -log test-reports/selenium.log
+      #      java -jar selenium-server-4.0.0-alpha-5.jar -role hub
+      #      java -jar selenium-server-4.0.0-alpha-5.jar -role node -hub http://localhost:4444
+      #    background: true
       - run: sudo apt-get update -y  
       - run: sudo apt-get install -y libnss3-dev
 
-      - run: npm install webdriverio
+      #- run: npm install webdriverio
 
-      - run:
-          name: Install latest version of ChromeDriver Sample
-          command: |
-            sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-            sudo sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-            sudo apt-get update
-            sudo apt-get install google-chrome-stable
-      - run:
-          name: Install latest version of ChromeDriver Sample
-          command: |
-            sudo wget https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip
-            sudo unzip chromedriver_linux64.zip
-            sudo rm chromedriver_linux64.zip
-            sudo mv chromedriver /usr/bin/
-            sudo chmod 777 /usr/bin/chromedriver
-            sudo apt-get install libxi6 libgconf-2-4
-            sudo apt-get -y install xvfb gtk2-engines-pixbuf
-            sudo apt-get -y install xfonts-cyrillic xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable
-            sudo apt-get install xvfb
-            sudo apt-get -y install imagemagick x11-apps
-      - run:
-          name: Running X virtual framebuffer
-          command: Xvfb :0 -ac &
+      #- run:
+      #    name: Install latest version of ChromeDriver Sample
+      #    command: |
+      #      sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+      #      sudo sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+      #      sudo apt-get update
+      #      sudo apt-get install google-chrome-stable
+      #- run:
+      #    name: Install latest version of ChromeDriver Sample
+      #    command: |
+      #      sudo wget https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip
+      #      sudo unzip chromedriver_linux64.zip
+      #      sudo rm chromedriver_linux64.zip
+      #      sudo mv chromedriver /usr/bin/
+      #      sudo chmod 777 /usr/bin/chromedriver
+      #      sudo apt-get install libxi6 libgconf-2-4
+      #      sudo apt-get -y install xvfb gtk2-engines-pixbuf
+      #      sudo apt-get -y install xfonts-cyrillic xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable
+      #      sudo apt-get install xvfb
+      #      sudo apt-get -y install imagemagick x11-apps
+      #- run:
+      #    name: Running X virtual framebuffer
+      #    command: Xvfb :0 -ac &
 
-      - run:
-          name: Run Tests
-          command: |
-            export DISPLAY=:99
+      #- run:
+      #    name: Run Tests
+      #    command: |
+      #      export DISPLAY=:99
       
       #Browser
       #- browser-tools/install-chrome
@@ -116,9 +116,10 @@ jobs:
       #    name: Running X virtual framebuffer
       #    command: Xvfb :99 & export DISPLAY=:99
           #background: true
-      #- setup_remote_docker:
-      #    version: 20.10.2
-      #- saucectl/saucectl-run
+
+      - setup_remote_docker:
+          version: 20.10.2
+      - saucectl/saucectl-run
 
       # Use mvn clean and package as the standard maven build phase
       - run:

@@ -42,7 +42,7 @@ public class MernCRUDTest {
 
 	  @Test
 	  public void testCreateUser() throws Exception {
-	    driver.get("http://localhost:3000");
+	    driver.get(baseUrl);
 	    driver.findElement(By.xpath("//div[@id='root']/div/div[2]/button")).click();//"//div[@id='root']/div/div[2]/button"
 	    driver.findElement(By.name("name")).click();
 	    driver.findElement(By.name("name")).clear();
@@ -63,7 +63,7 @@ public class MernCRUDTest {
 	  
 	  @Test
 	  public void testRetrieveUser() throws Exception {
-	    driver.get("http://localhost:3000");
+	    driver.get(baseUrl);
 	    driver.findElement(By.xpath("//div[@id='root']/div/div[2]/button")).click();
 	    driver.findElement(By.name("name")).click();
 	    driver.findElement(By.name("name")).clear();
@@ -85,7 +85,7 @@ public class MernCRUDTest {
 
 	  @Test
 	  public void testUpdateUser() throws Exception {
-		 driver.get("http://localhost:3000");
+		 driver.get(baseUrl);
 		 driver.findElement(By.xpath("//div[@id='root']/div/div[2]/button")).click();
 		 driver.findElement(By.name("name")).click();
 		 driver.findElement(By.name("name")).clear();
@@ -123,7 +123,7 @@ public class MernCRUDTest {
 	    
 	  @Test
 	  public void testDeleteUser() throws Exception {
-	    driver.get("http://localhost:3000");
+	    driver.get(baseUrl);
 	    driver.findElement(By.xpath("//div[@id='root']/div/div[2]/button")).click();
 	    driver.findElement(By.name("name")).click();
 	    driver.findElement(By.name("name")).clear();

@@ -125,8 +125,7 @@ public class DAOAlumnoTest extends DBTestCase{
 		//String id = "003";
 		Alumno alumnoExpected = new Alumno("hola3","003",20,"hola@hola.com");;
 		AlumnoDAOmysql daoMySQL = new AlumnoDAOmysql();
-		
-		
+			
 		try {
 			IDataSet databaseDataSet = getConnection().createDataSet();			
 			ITable actualTable = databaseDataSet.getTable("alumnos_tbl");

@@ -7,7 +7,6 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.Select;
 
@@ -27,13 +26,13 @@ public class MernCRUDTest {
 	  public void setUp() throws Exception {
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--headless");     
-        options.addArguments("--disable-gpu");
-        options.addArguments("--window-size=1920,1080");
-        options.addArguments("--ignore-certificate-errors");
-        options.addArguments("--allow-running-insecure-content");
+		//options.addArguments("--headless");     
+        //options.addArguments("--disable-gpu");
+        //options.addArguments("--window-size=1920,1080");
+        //options.addArguments("--ignore-certificate-errors");
+        //options.addArguments("--allow-running-insecure-content");
+	    driver = new ChromeDriver(options);
 	    baseUrl = "https://mern-crud.herokuapp.com/"; //"http://localhost:3000";
-	    driver = new RemoteWebDriver(options);//new ChromeDriver(options);
 	    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 	    js = (JavascriptExecutor) driver;
 	    

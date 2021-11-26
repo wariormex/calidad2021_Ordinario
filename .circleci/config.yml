@@ -19,8 +19,6 @@ jobs:
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DATABASE: pruebas_db
           MYSQL_DRIVER: com.mysql.cj.jdbc.Driver
-          MYSQL_USER: root
-          MYSQL_PASSWORD: secret
           PRUEBAS_DB_URL: jdbc:mysql://localhost:3306/pruebas_db
           
     # Add steps to the job

@@ -67,7 +67,7 @@ jobs:
       #    name: Check install
       - run:
           name: Running X virtual framebuffer
-          command: sudo Xvfb :99 -screen 0 1280x1024x24
+          command: Xvfb :99 -screen 0 1280x1024x24
           background: true
 
 

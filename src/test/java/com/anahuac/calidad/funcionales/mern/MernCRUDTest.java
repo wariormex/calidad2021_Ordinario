@@ -29,6 +29,8 @@ public class MernCRUDTest {
 		options.addArguments("--headless");     
         options.addArguments("--disable-gpu");
         options.addArguments("--window-size=1920,1080");
+        options.addArguments("--ignore-certificate-errors");
+        options.addArguments("--allow-running-insecure-content");
 	    driver = new ChromeDriver(options);
 	    baseUrl = "https://mern-crud.herokuapp.com/"; //"http://localhost:3000";
 	    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);

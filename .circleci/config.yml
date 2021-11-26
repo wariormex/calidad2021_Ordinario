@@ -21,7 +21,7 @@ jobs:
           MYSQL_DATABASE: pruebas_db
           PRUEBAS_DB_URL: jdbc:mysql://localhost:127.0.0.1/pruebas_db
       - image: circleci/node:buster-browsers
-      #- image: cimg/node:13.12-browser
+      - image: cimg/node:13.12-browsers
                  
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
@@ -58,13 +58,13 @@ jobs:
       - run: sudo apt-get update -y  
       - run: sudo apt-get install -y libnss3-dev
       #Browser
-      #- browser-tools/install-chrome
-      #- browser-tools/install-chromedriver
-      #- run:
-      #    command: |
-      #      google-chrome --version
-      #      chromedriver --version
-      #    name: Check install
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run:
+          command: |
+            google-chrome --version
+            chromedriver --version
+          name: Check install
 
 
       # Use mvn clean and package as the standard maven build phase

@@ -58,7 +58,10 @@ jobs:
           command: curl -O http://selenium-release.storage.googleapis.com/4.0-alpha-5/selenium-server-4.0.0-alpha-5.jar
       - run:
           name: Start Selenium
-          command: java -jar selenium-server-4.0.0-alpha-5.jar -log test-reports/selenium.log
+          command: |
+            java -jar selenium-server-4.0.0-alpha-5.jar -log test-reports/selenium.log
+            java -jar selenium-server-4.0.0-alpha-5.jar -role hub
+            java -jar selenium-server-4.0.0-alpha-5.jar -role node -hub http://localhost:4444
           background: true
       - run: sudo apt-get update -y  
       - run: sudo apt-get install -y libnss3-dev

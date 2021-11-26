@@ -13,11 +13,29 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
       - image: cimg/openjdk:11.0
+      - image: circleci/mysql:latest
+        #specify system properties
+        environment:
+          DB_ROOT_USER: root
+          MYSQL_ROOT_PASSWORD: "secret"
+          DB_DRIVER: com.mysql.cj.jdbc.Driver
+          DB_PASS: "secret"
+          PRUEBAS_DB_URL: jdbc:mysql://localhost:3306/pruebas_db
+          
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       # Checkout the code as the first step.
       - checkout
+
+      - run:
+          name: Wait for database service on the tcp protocol
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+        
+      - run: sudo apt-get install mysql-client
+      - run: mysql -h 127.0.0.1 -u root -e "create database pruebas_db"
+      - run: mysql -h 127.0.0.1 -u root -e "USE pruebas_db;"
+      - run: mysql -h 127.0.0.1 -u root -e "CREATE TABLE alumnos_tbl(id int(11) NOT NULL, nombre varchar(45) DEFAULT NULL, email varchar(45) DEFAULT NULL, edad varchar(11) DEFAULT NULL, PRIMARY KEY (idAlumno));"
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build

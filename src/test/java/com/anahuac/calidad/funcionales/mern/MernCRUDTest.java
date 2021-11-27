@@ -28,11 +28,11 @@ public class MernCRUDTest {
 	  public void setUp() throws Exception {
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
-		//options.addArguments("--headless");     
-        //options.addArguments("--disable-gpu");
-        //options.addArguments("--window-size=1920,1080");
-        //options.addArguments("--ignore-certificate-errors");
-        //options.addArguments("--allow-running-insecure-content");
+		options.addArguments("--headless");     
+        options.addArguments("--disable-gpu");
+        options.addArguments("--window-size=2560,1440");
+        options.addArguments("--ignore-certificate-errors");
+        options.addArguments("--allow-running-insecure-content");
 		options.setCapability(CapabilityType.SUPPORTS_NETWORK_CONNECTION, true);
 	    driver = new ChromeDriver(options);
 	    baseUrl = "https://mern-crud.herokuapp.com/"; //"http://localhost:3000";

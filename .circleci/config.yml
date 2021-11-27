@@ -67,8 +67,8 @@ jobs:
       - run: mysql -h 127.0.0.1 -u root -psecret -e "USE pruebas_db;CREATE TABLE alumnos_tbl(id varchar(11) NOT NULL, nombre varchar(45) DEFAULT NULL, email varchar(45) DEFAULT NULL, edad int(11) DEFAULT NULL, PRIMARY KEY (id));"
       
       #Selenium
-      #- run: sudo apt-get update -y  
-      #- run: sudo apt-get install -y libnss3-dev
+      - run: sudo apt-get update -y  
+      - run: sudo apt-get install -y libnss3-dev
 
       - run:
           name: Install latest version of Xvfb

@@ -71,6 +71,14 @@ jobs:
       - run: sudo apt-get install -y libnss3-dev
 
       - run:
+          name: Install latest version of Chrome Sample
+          command: |
+            sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            sudo sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+            sudo apt-get update
+            sudo apt-get install google-chrome-stable
+
+      - run:
           name: Install latest version of Xvfb
           command: |
             sudo apt-get install -y xvfb 

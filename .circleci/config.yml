@@ -14,7 +14,7 @@ jobs:
     # Be sure to update the Docker image tag below to openjdk version of your application.
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
-      - image: cimg/openjdk:11.0.12-browsers
+      - image: circleci/openjdk:11-browsers-legacy
         environment:
           DB_ROOT_USER: root
           DB_DRIVER: com.mysql.cj.jdbc.Driver
@@ -25,7 +25,7 @@ jobs:
           MYSQL_DATABASE: pruebas_db
           PRUEBAS_DB_URL: jdbc:mysql://127.0.0.1:3306/pruebas_db 
       #- image: cimg/base:2021.11
-      - image: circleci/mysql:latest
+      - image: circleci/mysql:5.7
         environment:
           DB_ROOT_USER: root
           DB_DRIVER: com.mysql.cj.jdbc.Driver
@@ -67,23 +67,13 @@ jobs:
       - run: mysql -h 127.0.0.1 -u root -psecret -e "USE pruebas_db;CREATE TABLE alumnos_tbl(id varchar(11) NOT NULL, nombre varchar(45) DEFAULT NULL, email varchar(45) DEFAULT NULL, edad int(11) DEFAULT NULL, PRIMARY KEY (id));"
       
       #Selenium
-      - run: sudo apt-get update -y  
-      - run: sudo apt-get install -y libnss3-dev
-
-      - run:
-          name: Install latest version of Chrome Sample
-          command: |
-            sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-            sudo sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-            sudo apt-get update
-            sudo apt-get install google-chrome-stable
+      #- run: sudo apt-get update -y  
+      #- run: sudo apt-get install -y libnss3-dev
 
       - run:
           name: Install latest version of Xvfb
           command: |
             sudo apt-get install -y xvfb 
-
-
 
       # Use mvn clean and package as the standard maven build phase
       - run:

@@ -15,13 +15,13 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
       - image: circleci/openjdk:11-browsers-legacy
+      #- image: cimg/base:2021.11
+      - image: circleci/mysql:latest
         environment:
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DRIVER: com.mysql.cj.jdbc.Driver
           MYSQL_DATABASE: pruebas_db
           PRUEBAS_DB_URL: jdbc:mysql://localhost:127.0.0.1/pruebas_db
-      #- image: cimg/base:2021.11
-      - image: circleci/mysql:latest
       #- image: circleci/node:buster-browsers
       #- image: cimg/node:17.1.0-browsers
       #- image: wariormex/mern-crud:latest

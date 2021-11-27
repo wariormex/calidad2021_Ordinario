@@ -16,48 +16,15 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 
-//LambdaTest
-import org.testng.annotations.Test;
-import java.net.MalformedURLException;
-import java.net.URL;
-import org.openqa.selenium.By;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.BeforeTest;
-
 public class MernCRUDTest {
-	  //private WebDriver driver;
+	  private WebDriver driver;
 	  private String baseUrl;
 	  private boolean acceptNextAlert = true;
 	  private StringBuffer verificationErrors = new StringBuffer();
 	  JavascriptExecutor js;
 	  
-	  //LambdaTest
-	  public RemoteWebDriver driver = null;
-	  String username = "00378341";
-	  String accessKey = "a4j83XWNNuGL6MVtUw03UlCJTNVxyoRtlmCnYR5D8eEZQ1d72M";
-	  
 	  @Before
 	  public void setUp() throws Exception {
-		  
-		  DesiredCapabilities capabilities = new DesiredCapabilities();
-		  capabilities.setCapability("platform", "Windows 10");
-		  capabilities.setCapability("browserName", "Chrome");
-		  capabilities.setCapability("version", "96.0"); // If this cap isn't specified, it will just get the any available one
-		  capabilities.setCapability("resolution","2560x1440");
-		  capabilities.setCapability("build", "First Test");
-		  capabilities.setCapability("name", "Sample Test");
-		  capabilities.setCapability("network", true); // To enable network logs
-		  capabilities.setCapability("visual", true); // To enable step by step screenshot
-		  capabilities.setCapability("video", true); // To enable video recording
-		  capabilities.setCapability("console", true); // To capture console logs
-
-		  try {
-		    driver = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey + "@hub.lambdatest.com/wd/hub"), capabilities);
-		  } catch (MalformedURLException e) {
-		    System.out.println("Invalid grid URL");
-		  } 
-		/*  
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
 		//options.addArguments("--headless");     
@@ -69,7 +36,7 @@ public class MernCRUDTest {
 	    baseUrl = "https://mern-crud.herokuapp.com/"; //"http://localhost:3000";
 	    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 	    js = (JavascriptExecutor) driver;
-	    */
+	    
 	    driver.get(baseUrl);
 	    String tag = driver.findElement(By.xpath("/html/body/div/div/div[2]/table/tbody")).getText();
 	    while(tag != "") {

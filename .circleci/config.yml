@@ -45,6 +45,7 @@ jobs:
             done
             echo Failed waiting for MySQL && exit 1  
 
+      - run: sudo rm -rf /var/lib/apt/lists/*
       - run: sudo apt-get update
       - run: sudo apt-get install -y default-mysql-client
       - run: mysql -h 127.0.0.1 -u root -psecret -e "SELECT user();"

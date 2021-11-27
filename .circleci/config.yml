@@ -81,12 +81,6 @@ jobs:
           command: |
             sudo apt-get install -y xvfb 
       
-      - run:
-          name: Prepare localhost:3000
-          command: |
-            sudo thin start -p 3000
-
-
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build

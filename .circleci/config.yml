@@ -3,7 +3,7 @@
 version: 2.1
 orbs:
   #browser-tools: circleci/browser-tools@1.2.3
-  saucectl: saucelabs/saucectl-run@2.0.0
+  lambda-tunnel: lambdatest/lambda-tunnel@1.0.5
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -117,9 +117,39 @@ jobs:
       #    command: Xvfb :99 & export DISPLAY=:99
           #background: true
 
-      - setup_remote_docker:
-          version: 20.10.2
-      - saucectl/saucectl-run
+      - run:
+ 
+          name: "Setup custom environment variables // its your workflow step"
+ 
+          command: |
+ 
+            echo 'export LT_USERNAME="{00378341}"' >> $BASH_ENV
+ 
+      - run:
+ 
+          name: "Setup custom environment variables"
+ 
+          command: |
+ 
+            echo 'export LT_ACCESS_KEY="{a4j83XWNNuGL6MVtUw03UlCJTNVxyoRtlmCnYR5D8eEZQ1d72M}"' >> $BASH_ENV
+ 
+      - run: # Validating your above mentioned environment variables
+ 
+          name: "Here is the LT_Username : "
+ 
+          command: echo ${LT_USERNAME}      
+ 
+      # Download and cache dependencies
+ 
+      - restore_cache:
+ 
+          keys:
+ 
+            - v1-dependencies-{{ checksum "package.json" }}
+ 
+            # fallback to using the latest cache if no exact match is found
+ 
+      - run: npm install
 
       # Use mvn clean and package as the standard maven build phase
       - run:

@@ -92,6 +92,8 @@ jobs:
             chromedriver --version
           name: Check install
 
+
+
       #- run: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add
       #- run: echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
       #- run: sudo apt-get update -y 
@@ -110,7 +112,7 @@ jobs:
       # Then run your tests!
       - run:
           name: Test
-          command: mvn test
+          command: mvn test -e
 #
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

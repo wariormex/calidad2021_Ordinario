@@ -84,7 +84,6 @@ jobs:
       - run:
           name: Prepare localhost:3000
           command: |
-            sudo ufw allow 3000
             sudo thin start -p 3000
 
 

@@ -77,7 +77,7 @@ jobs:
       - run:
           name: Install latest version of Xbfb
           command: |
-            sudo apt-get install -y xvfb chrome
+            sudo apt-get install -y xvfb 
             
       - run:
           name: Running X virtual framebuffer

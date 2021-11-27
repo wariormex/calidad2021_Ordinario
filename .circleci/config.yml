@@ -2,8 +2,8 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 orbs:
-  #browser-tools: circleci/browser-tools@1.2.3
-  lambda-tunnel: lambdatest/lambda-tunnel@1.0.5
+  browser-tools: circleci/browser-tools@1.2.3
+  #lambda-tunnel: lambdatest/lambda-tunnel@1.0.5
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -14,9 +14,9 @@ jobs:
     # Be sure to update the Docker image tag below to openjdk version of your application.
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
-      - image: cimg/openjdk:11.0.12-browsers
+      - image: circleci/openjdk:11-browsers-legacy
       #- image: cimg/base:2021.11
-      - image: circleci/mysql:latest
+      #- image: circleci/mysql:latest
         environment:
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DRIVER: com.mysql.cj.jdbc.Driver
@@ -51,70 +51,15 @@ jobs:
       - run: mysql -h 127.0.0.1 -u root -psecret -e "USE pruebas_db;CREATE TABLE alumnos_tbl(id varchar(11) NOT NULL, nombre varchar(45) DEFAULT NULL, email varchar(45) DEFAULT NULL, edad int(11) DEFAULT NULL, PRIMARY KEY (id));"
       
       #Selenium
-      #- run: mkdir test-reports
-      #- run:
-      #    name: Download Selenium
-      #    command: curl -O http://selenium-release.storage.googleapis.com/4.0-alpha-5/selenium-server-4.0.0-alpha-5.jar
-      #- run:
-      #    name: Start Selenium
-      #    command: |
-      #      java -jar selenium-server-4.0.0-alpha-5.jar -log test-reports/selenium.log
-      #      java -jar selenium-server-4.0.0-alpha-5.jar -role hub
-      #      java -jar selenium-server-4.0.0-alpha-5.jar -role node -hub http://localhost:4444
-      #    background: true
-      - run: sudo apt-get update -y  
-      - run: sudo apt-get install -y libnss3-dev
-
-      #- run: npm install webdriverio
+      #- run: sudo apt-get update -y  
+      #- run: sudo apt-get install -y libnss3-dev
 
       - run:
-          name: Install latest version of ChromeDriver Sample
+          name: Install latest version of Xvfb
           command: |
-            sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-            sudo sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-            sudo apt-get update
-            sudo apt-get install google-chrome-stable
-      - run:
-          name: Install latest version of ChromeDriver Sample
-          command: |
-            sudo wget https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip
-            sudo unzip chromedriver_linux64.zip
-            sudo rm chromedriver_linux64.zip
-            sudo mv chromedriver /usr/bin/
-            sudo chmod 777 /usr/bin/chromedriver
-            sudo apt-get install libxi6 libgconf-2-4
-            sudo apt-get -y install xvfb gtk2-engines-pixbuf
-            sudo apt-get -y install xfonts-cyrillic xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable
-            sudo apt-get install xvfb
-            sudo apt-get -y install imagemagick x11-apps
-      - run:
-          name: Running X virtual framebuffer
-          command: Xvfb :0 -ac &
+            sudo apt-get install -y xvfb 
 
-      - run:
-          name: Run Tests
-          command: |
-            export DISPLAY=:99
-      
-      #Browser
-      #- browser-tools/install-chrome
-      #- browser-tools/install-chromedriver
-      #- run:
-      #    command: |
-      #      google-chrome --version
-      #      chromedriver --version
-      #    name: Check install
 
-      #- run: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add
-      #- run: echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-      #- run: sudo apt-get update -y 
-      #- run: sudo apt-get install -y google-chrome-stable
-      #- run: sudo apt-get install -y xvfb
-      #- run: xvfb-run google-chrome-stable --headless --disable-gpu --no-sandbox --disable-setuid-sandbox --remote-debugging-port=9222 http://localhost
-      #- run:
-      #    name: Running X virtual framebuffer
-      #    command: Xvfb :99 & export DISPLAY=:99
-          #background: true
 
       # Use mvn clean and package as the standard maven build phase
       - run:
@@ -122,8 +67,11 @@ jobs:
           command: mvn -B -DskipTests clean package
       # Then run your tests!
       - run:
+          name: Running X virtual framebuffer
+          command: Xvfb :99 & export DISPLAY=:99
+      - run:
           name: Test
-          command: mvn test
+          command: mvn test -e -X
 #
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

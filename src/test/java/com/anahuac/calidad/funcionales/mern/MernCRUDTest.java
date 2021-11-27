@@ -36,7 +36,7 @@ public class MernCRUDTest {
         //options.addArguments("--allow-running-insecure-content");
 		//options.setCapability(CapabilityType.SUPPORTS_NETWORK_CONNECTION, true);
 	    driver = new ChromeDriver();
-	    baseUrl = "http://127.0.0.1:3000";//"https://mern-crud.herokuapp.com/"; //"http://localhost:3000";
+	    baseUrl = "http://localhost:3000";//"https://mern-crud.herokuapp.com/"; //"http://localhost:3000";
 	    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 	    js = (JavascriptExecutor) driver;
 	    

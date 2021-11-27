@@ -19,14 +19,14 @@ jobs:
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DRIVER: com.mysql.cj.jdbc.Driver
           MYSQL_DATABASE: pruebas_db
-          PRUEBAS_DB_URL: jdbc:mysql://localhost:127.0.0.1/pruebas_db 
+          PRUEBAS_DB_URL: jdbc:mysql://127.0.0.1:3306/pruebas_db 
       #- image: cimg/base:2021.11
       - image: circleci/mysql:latest
         environment:
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DRIVER: com.mysql.cj.jdbc.Driver
           MYSQL_DATABASE: pruebas_db
-          PRUEBAS_DB_URL: jdbc:mysql://127.0.0.1:3306/pruebas_db      
+          PRUEBAS_DB_URL: jdbc:mysql://127.0.0.1:3306/pruebas_db      #jdbc:mysql://localhost:127.0.0.1/pruebas_db 
       #- image: circleci/node:buster-browsers
       #- image: cimg/node:17.1.0-browsers
       #- image: wariormex/mern-crud:latest
